@@ -11,3 +11,30 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+body {
+  background-color: #EAC9C1;
+}
+
+.calendar{
+  width: 55%;
+  height: auto;
+  background-color: #EAC9C1;
+}
+.student{
+  width: 40%;
+  height: auto;
+  background-color: #EAC9C1;
+}
+
+#right{
+  float: right;
+}
+
+#left{
+  text-align: left;
+}
+
+#center{
+  text-align: center;
+}

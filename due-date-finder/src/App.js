@@ -5,6 +5,10 @@ import axios from 'axios';
 
 import React,{Component} from 'react';
 
+import calendar from './images/calendar.png';
+import student from './images/students_books.png.png';
+
+
 class App extends Component {
 
 	state = {
@@ -81,11 +85,32 @@ class App extends Component {
 	
 	render() {
 	
+    const mystyle = {
+      color: "black",
+      backgroundColor: "#faf6f3",
+      padding: "30px",
+      fontFamily: "Brush Script MT",
+      "font-size" : "65px",
+      
+    };
 	return (
 		<div>
+     
+      <h1 id='center' style={mystyle}>Syllamate</h1>
+     
+
+      <div>
+      <img className='student' src={student} id='left' alt = ''/> 
+      
+
+      
+      <img className='calendar' src={calendar}  id='right' alt = ''/>
+      </div>
+      
+
 			<div>
 				<input type="file" onChange={this.onFileChange} />
-				<button onClick={this.onFileUpload}>
+				<button name='Upload' onClick={this.onFileUpload}>
 				Upload!
 				</button>
 			</div>
