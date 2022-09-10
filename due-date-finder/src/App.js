@@ -29,9 +29,8 @@ class App extends Component {
 	
 	// Update the formData object
 	formData.append(
-		"myFile",
-		this.state.selectedFile,
-		this.state.selectedFile.name
+		"file",
+		this.state.selectedFile
 	);
 	
 	// Details of the uploaded file
@@ -39,7 +38,13 @@ class App extends Component {
 	
 	// Request made to the backend api
 	// Send formData object
-	axios.post("api/uploadfile", formData);
+	axios.post("/uploadfile", formData).then((response) => response.json())
+			.then((result) => {
+				console.log('Success:', result);
+			})
+			.catch((error) => {
+				console.error('Error:', error);
+			});
 	};
 	
 	// File content to be displayed after
