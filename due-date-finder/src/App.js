@@ -1,3 +1,5 @@
+//code reused from https://www.geeksforgeeks.org/file-uploading-in-react-js/
+
 import axios from 'axios';
 
 import React,{Component} from 'react';
@@ -50,6 +52,8 @@ class App extends Component {
 			<h2>File Details:</h2>
 			
 <p>File Name: {this.state.selectedFile.name}</p>
+		
+//selectedFile holds the file uploaded 
 
 			
 <p>File Type: {this.state.selectedFile.type}</p>
