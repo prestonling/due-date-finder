@@ -76,19 +76,12 @@ class App extends Component {
 	
 	return (
 		<div>
-			<h1>
-			File Uploader
-			</h1>
-			<h3>
-			File Upload using React!
-			</h3>
 			<div>
 				<input type="file" onChange={this.onFileChange} />
 				<button onClick={this.onFileUpload}>
 				Upload!
 				</button>
 			</div>
-		{this.fileData()}
 		</div>
 	);
 	}
