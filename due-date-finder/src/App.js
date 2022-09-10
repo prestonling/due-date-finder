@@ -1,5 +1,16 @@
 import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+
+function FileUploadPage(){
+  return(
+    <div>
+      <input type="file" name="file" onChange={changeHandler} />
+      <div>
+        <button onClick={handleSubmission}>Submit</button> </div>
+          </div>
+   )
+  }
 
 function App() {
   return (
