@@ -27,9 +27,8 @@ class App extends Component {
 
 	// Hides the download button when the file is changed. 
 	document.getElementById("downloadButton").style.display='none';
-	
+
 	};
-	
   
 	// On file upload (click the upload button)
 	onFileUpload = () => {
