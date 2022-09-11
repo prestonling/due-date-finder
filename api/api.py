@@ -30,6 +30,6 @@ def upload_file():
             filename = secure_filename(file.filename)
             file.save(os.path.join(dirname, app.config['UPLOAD_FOLDER'], filename))
             return redirect(url_for('download_file', name=filename))
-@app.route('/uploads/<name>')
+@app.route('/download/<name>', methods=['GET'])
 def download_file(name):
     return send_from_directory(app.config["UPLOAD_FOLDER"], name)

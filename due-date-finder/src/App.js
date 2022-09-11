@@ -78,12 +78,12 @@ class App extends Component {
 		<div>
 			<h2>File Details:</h2>
 			
-<p>File Name: {this.state.selectedFile.name}</p>
-		
-<p>File Type: {this.state.selectedFile.type}</p>
+            <p>File Name: {this.state.selectedFile.name}</p>
+                    
+            <p>File Type: {this.state.selectedFile.type}</p>
 
-			
-<p>
+                        
+            <p>
 			Last Modified:{" "}
 			{this.state.selectedFile.lastModifiedDate.toDateString()}
 			</p>
