@@ -24,6 +24,9 @@ class App extends Component {
 	
 	// Update the state
 	this.setState({ selectedFile: event.target.files[0] });
+
+	// Hides the download button when the file is changed. 
+	document.getElementById("downloadButton").style.display='none';
 	
 	};
 	
@@ -31,40 +34,44 @@ class App extends Component {
 	// On file upload (click the upload button)
 	onFileUpload = () => {
 
-    // Scrolls to the Download button at the bottom of the page
-    document.getElementById('downloadButton').scrollIntoView();
+		// checks if the file has the .pdf extension
+		if (this.state.selectedFile.name.split(".").pop().toLowerCase() === "pdf"){
 
-    // Shows the download button
-    document.getElementById("downloadButton").style.display='block';
+			// Scrolls to the Download button at the bottom of the page
+			document.getElementById('downloadButton').scrollIntoView();
 
-    // guid or uuid generator
-    uuidv4(); // ⇨ '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d'
+			// Shows the download button
+			document.getElementById("downloadButton").style.display='block';
 
-	// Create an object of formData
-	const formData = new FormData();
-	
-	// Update the formData object
-	formData.append(
-		"file",
-		this.state.selectedFile
-	);
-	
-	// this id is fileName + guid
-	const id = this.state.selectedFile.name + "" + uuidv4();
+			// guid or uuid generator
+			uuidv4(); // ⇨ '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d'
+
+			// Create an object of formData
+			const formData = new FormData();
+			
+			// Update the formData object
+			formData.append(
+				"file",
+				this.state.selectedFile
+			);
+			
+			// this id is fileName + guid
+			const id = this.state.selectedFile.name + "" + uuidv4();
 
 
-	// Details of the uploaded file
-	console.log(this.state.selectedFile);
-	
-	// Request made to the backend api
-	// Send formData object
-	axios.post("/uploadfile", formData).then((response) => response.json())
-			.then((result) => {
-				console.log('Success:', result);
-			})
-			.catch((error) => {
-				console.error('Error:', error);
-			});
+			// Details of the uploaded file
+			console.log(this.state.selectedFile);
+			
+			// Request made to the backend api
+			// Send formData object
+			axios.post("/uploadfile", formData).then((response) => response.json())
+					.then((result) => {
+						console.log('Success:', result);
+					})
+					.catch((error) => {
+						console.error('Error:', error);
+					});
+		}
 	};
 
   // This is what happens after you press the download button.
