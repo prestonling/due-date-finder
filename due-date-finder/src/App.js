@@ -2,10 +2,12 @@
 //selectedFile holds the file uploaded 
 
 import axios from 'axios';
+import { v4 as uuidv4 } from 'uuid';
 
 import React,{Component} from 'react';
 
-import calendar from './images/calendar.png';
+
+import calendar from './images/calender.png';
 import student from './images/students_books.png.png';
 
 
@@ -25,26 +27,46 @@ class App extends Component {
 	
 	};
 	
+  
 	// On file upload (click the upload button)
 	onFileUpload = () => {
+
+    // Scrolls to the Download button at the bottom of the page
+    document.getElementById('downloadButton').scrollIntoView();
+
+    // Shows the download button
+    document.getElementById("downloadButton").style.display='block';
+
+    // guid or uuid generator
+    uuidv4(); // ⇨ '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d'
+
+
+    // We didn't know if you are using axios or not, so we left it in the chance it will help.
+    {
+        // Create an object of formData
+      const formData = new FormData();
+      
+      // Update the formData object
+      formData.append(
+        "myFile",
+        this.state.selectedFile,
+        this.state.selectedFile.name
+      );
+      
+      // Details of the uploaded file
+      console.log(this.state.selectedFile);
+      
+      // Request made to the backend api
+      // Send formData object
+      axios.post("api/uploadfile", formData);
+    }
 	
-	// Create an object of formData
-	const formData = new FormData();
-	
-	// Update the formData object
-	formData.append(
-		"myFile",
-		this.state.selectedFile,
-		this.state.selectedFile.name
-	);
-	
-	// Details of the uploaded file
-	console.log(this.state.selectedFile);
-	
-	// Request made to the backend api
-	// Send formData object
-	axios.post("api/uploadfile", formData);
 	};
+
+  // This is what happens after you press the download button.
+  downloadFile = () => {
+
+  }
 	
 	// File content to be displayed after
 	// file upload is complete
@@ -80,18 +102,28 @@ class App extends Component {
 	
 	render() {
 	
-    const mystyle = {
-      color: "black",
+    const styleTitle = {
+      color: "#a2a09f",
       backgroundColor: "#faf6f3",
       padding: "30px",
       fontFamily: "Brush Script MT",
-      "font-size" : "65px",
-      
+      "font-size" : "70px",
+      marginTop: 0
     };
+
+    const styleButton = {
+      color: "#a2a09f",
+      backgroundColor: "#faf6f3",
+      padding: "30px",
+      fontFamily: "Brush Script MT",
+      "font-size" : "70px",
+      marginTop: 0
+    };
+    
 	return (
 		<div>
      
-      <h1 id='center' style={mystyle}>Syllamate</h1>
+      <h1 id='center' style={styleTitle}>Syllamate</h1>
      
 
       <div>
@@ -104,12 +136,20 @@ class App extends Component {
       
 
 			<div>
-				<input type="file" onChange={this.onFileChange} />
-				<button name='Upload' onClick={this.onFileUpload}>
+			<input id="file-upload" type="file" onChange={this.onFileChange} />
+        <br></br>
+			  <button style={styleButton} name='Upload' id='rcorners3' onClick={this.onFileUpload}>
+          
 				Upload!
 				</button>
+      
 			</div>
+      <div id='center'>
+      <button  style={styleButton} className='downloadButton' id='downloadButton' hidden onClick={this.downloadFile}>Get your schedule!</button>
+      </div>
 		</div>
+
+
 	);
 	}
 }

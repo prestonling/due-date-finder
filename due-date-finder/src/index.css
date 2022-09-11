@@ -22,8 +22,10 @@ body {
   background-color: #EAC9C1;
 }
 .student{
-  width: 40%;
+  width: 34%;
   height: auto;
+  text-align: center;
+  margin-left: 60px;
   background-color: #EAC9C1;
 }
 
@@ -37,4 +39,32 @@ body {
 
 #center{
   text-align: center;
+}
+
+#rcorners3 {
+  border-radius: 25px;
+  background-position: left top;
+  background-repeat: repeat;
+  width: 300px;
+  height: 150px;
+  margin-left: 200px;
+  margin-bottom: 55px;
+}
+
+#file-upload {
+  padding: 20px;
+  margin-left: 250px;
+}
+
+#downloadButton{
+  text-align: center;
+  background-position: left top;
+  background-repeat: repeat;
+  width: 100%;
+  height: auto;
+  border:0;
+}
+
+.downloadButton :hover{
+color: rebeccapurple;
 }
