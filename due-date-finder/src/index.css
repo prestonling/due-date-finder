@@ -64,3 +64,8 @@ body {
   height: auto;
   border:0;
 }
+
+#error{
+  color: red;
+  margin-left: 250px;
+}

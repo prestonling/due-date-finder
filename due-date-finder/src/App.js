@@ -12,12 +12,14 @@ import student from './images/students_books.png.png';
 
 
 class App extends Component {
+	
 
 	state = {
 
 	// Initially, no file is selected
 	selectedFile: null
 	};
+
 	
 	// On file select (from the pop up)
 	onFileChange = event => {
@@ -28,13 +30,16 @@ class App extends Component {
 	// Hides the download button when the file is changed. 
 	document.getElementById("downloadButton").style.display='none';
 
+	// Hides the error message when file is changed
+	document.getElementById('error').style.display='none';
+
 	};
   
 	// On file upload (click the upload button)
 	onFileUpload = () => {
 
 		// checks if the file has the .pdf extension
-		if (this.state.selectedFile.name.split(".").pop().toLowerCase() === "pdf"){
+		if (this.state.selectedFile != null && this.state.selectedFile.name.split(".").pop().toLowerCase() === "pdf"){
 
 			// Scrolls to the Download button at the bottom of the page
 			document.getElementById('downloadButton').scrollIntoView();
@@ -70,6 +75,8 @@ class App extends Component {
 					.catch((error) => {
 						console.error('Error:', error);
 					});
+		}else{
+			document.getElementById('error').style.display='block';
 		}
 	};
 
@@ -78,6 +85,8 @@ class App extends Component {
 
   }
 	render() {
+	
+		
 	
     const styleTitle = {
       color: "#a2a09f",
@@ -96,6 +105,8 @@ class App extends Component {
       "font-size" : "70px",
       marginTop: 0
     };
+
+	const errorMessage = "You need to upload a pdf file!";
     
 	return (
 		<div>
@@ -114,12 +125,15 @@ class App extends Component {
 
 			<div>
 			<input id="file-upload" type="file" onChange={this.onFileChange} />
+			{errorMessage && <div id='error' hidden> {errorMessage} </div>}
+
         <br></br>
+		
 			  <button style={styleButton} name='Upload' id='rcorners3' onClick={this.onFileUpload}>
           
 				Upload!
 				</button>
-      
+
 			</div>
       <div id='center'>
       <button  style={styleButton} className='downloadButton' id='downloadButton' hidden onClick={this.downloadFile}>Get your schedule!</button>
