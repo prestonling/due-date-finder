@@ -49,6 +49,10 @@ class App extends Component {
 		this.state.selectedFile
 	);
 	
+	// this id is fileName + guid
+	const id = this.state.selectedFile.name + "" + uuidv4();
+
+
 	// Details of the uploaded file
 	console.log(this.state.selectedFile);
 	
@@ -67,38 +71,7 @@ class App extends Component {
   downloadFile = () => {
 
   }
-	
-	// File content to be displayed after
-	// file upload is complete
-	fileData = () => {
-	
-	if (this.state.selectedFile) {
-		
-		return (
-		<div>
-			<h2>File Details:</h2>
-			
-<p>File Name: {this.state.selectedFile.name}</p>
-		
-<p>File Type: {this.state.selectedFile.type}</p>
 
-			
-<p>
-			Last Modified:{" "}
-			{this.state.selectedFile.lastModifiedDate.toDateString()}
-			</p>
-
-		</div>
-		);
-	} else {
-		return (
-		<div>
-			<br />
-			<h4>Choose before Pressing the Upload button</h4>
-		</div>
-		);
-	}
-	};
 	
 	render() {
 	
