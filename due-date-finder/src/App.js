@@ -40,27 +40,6 @@ class App extends Component {
     // guid or uuid generator
     uuidv4(); // ⇨ '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d'
 
-
-    // We didn't know if you are using axios or not, so we left it in the chance it will help.
-    {
-        // Create an object of formData
-      const formData = new FormData();
-      
-      // Update the formData object
-      formData.append(
-        "myFile",
-        this.state.selectedFile,
-        this.state.selectedFile.name
-      );
-      
-      // Details of the uploaded file
-      console.log(this.state.selectedFile);
-      
-      // Request made to the backend api
-      // Send formData object
-      axios.post("api/uploadfile", formData);
-    }
-	
 	// Create an object of formData
 	const formData = new FormData();
 	
