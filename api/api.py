@@ -1,6 +1,8 @@
 import os, time
-from flask import Flask, flash, request, redirect, url_for
+from flask import Flask, flash, request, redirect, url_for, jsonify
 from werkzeug.utils import secure_filename
+from converterScript import convert
+
 
 UPLOAD_FOLDER = 'uploads'
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
@@ -29,7 +31,9 @@ def upload_file():
             dirname = os.path.dirname(__file__)
             filename = secure_filename(file.filename)
             file.save(os.path.join(dirname, app.config['UPLOAD_FOLDER'], filename))
-            return redirect(url_for('download_file', name=filename))
-@app.route('/download/<name>', methods=['GET'])
-def download_file(name):
-    return send_from_directory(app.config["UPLOAD_FOLDER"], name)
+            convert(filename)
+            resp = jsonify(success=True)
+            return resp
+# @app.route('/download/<name>', methods=['GET'])
+# def download_file(name):
+#     return send_from_directory(app.config["UPLOAD_FOLDER"], name)

@@ -29,43 +29,44 @@ from pathlib import Path
 import camelot
 from dateutil.parser import parse
 
-#filepath = r"C:\Users\dhana\Documents\Hackathon\Syllabus_MGTSC405_F2022_08Sep2022.pdf"
+def convert(filename):
+    #filepath = r"C:\Users\dhana\Documents\Hackathon\Syllabus_MGTSC405_F2022_08Sep2022.pdf"
+    dirname = os.path.dirname(__file__)
+    uploads_path = os.path.join(dirname, "uploads")
+    filepath = os.path.join(dirname, "uploads", filename )
+    df = read_pdf(
+        filepath, pages="all", encoding='mac_roman'
+    )
 
-filename = "uploads/Syllabus_MGTSC405_F2022_08Sep2022.pdf"
-dirname = os.path.dirname(__file__)
-filepath = os.path.join(dirname, filename)
-df = read_pdf(
-    filepath, pages="all", encoding='mac_roman'
-)
+    cal = Calendar()
 
-cal = Calendar()
+    table_index = -1
+    date_index = -1
+    other_index = -1
+    for tables in df:
+        tables = tables.values.tolist()
+        for rows in tables:
+            for entries in rows:
+                try:   
+                    if is_date(entries):
+                        
+                        #table_index = df.index('tables')
+                        date_index = rows.index(entries)
+                        event = Event()
+                        summary_index = 1 - date_index
+                        summary = rows[summary_index]
+                        date = parser.parse(rows[date_index])
+                        event.add('summary',summary)
+                        event.add('dtstart', date)   
+                        print(date)
+                        cal.add_component(event)
 
-table_index = -1
-date_index = -1
-other_index = -1
-for tables in df:
-    tables = tables.values.tolist()
-    for rows in tables:
-        for entries in rows:
-            try:   
-                if is_date(entries):
-                    
-                    #table_index = df.index('tables')
-                    date_index = rows.index(entries)
-                    event = Event()
-                    summary_index = 1 - date_index
-                    summary = rows[summary_index]
-                    date = parser.parse(rows[date_index])
-                    event.add('summary',summary)
-                    event.add('dtstart', date)   
-                    print(date)
-                    cal.add_component(event)
-
-            except TypeError:
-                continue
-  
-directory = str(Path(__file__).parent.parent) + "/"
-print("ics file will be generated at ", directory)
-f = open(os.path.join(directory, 'example.ics'), 'wb')
-f.write(cal.to_ical())
-f.close()        
+                except TypeError:
+                    continue
+      
+    directory = str(Path(__file__).parent.parent) + "/"
+    print("ics file will be generated at ", directory)
+    new_filename = os.path.splitext(filename)[0]
+    f = open(os.path.join(uploads_path, new_filename+".ics"), 'wb')
+    f.write(cal.to_ical())
+    f.close()        
